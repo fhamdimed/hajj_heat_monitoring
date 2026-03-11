@@ -188,7 +188,7 @@ st.markdown("""
 
     # MainMenu {visibility: hidden;}
     footer {visibility: hidden;}
-    # header {visibility: hidden;}
+    header {visibility: hidden;}
     .stDeployButton {display: none;}
     #stDecoration {display: none;}
 
