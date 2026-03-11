@@ -80,61 +80,127 @@ c4.427,0,8.017-3.589,8.017-8.017v-59.858C469.244,114.754,465.655,111.165,461.228
 # Custom CSS
 st.markdown("""
 <style>
+    /* ---------- TYPOGRAPHY / HEADERS ---------- */
+
     .main-header {
         font-size: 2.5rem;
         color: #2c3e50;
         text-align: center;
         margin-bottom: 1rem;
+        font-weight: 700;
     }
+
+    /* ---------- ALERT BOXES ---------- */
+
     .alert-box {
-        padding: 1rem;
-        border-radius: 0.5rem;
+        padding: 1rem 1.1rem;
+        border-radius: 0.6rem;
         margin: 0.5rem 0;
-        font-weight: bold;
+        font-weight: 600;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
     }
-    .green { background-color: #d4edda; color: #155724; border-left: 5px solid #28a745; }
-    .yellow { background-color: #fff3cd; color: #856404; border-left: 5px solid #ffc107; }
-    .orange { background-color: #ffe5b4; color: #854d0e; border-left: 5px solid #fd7e14; }
-    .red { background-color: #f8d7da; color: #721c24; border-left: 5px solid #dc3545; }
-    .black { background-color: #343a40; color: white; border-left: 5px solid #000000; }
+
+    .green {
+        background-color: #d4edda;
+        color: #155724;
+        border-left: 5px solid #28a745;
+    }
+
+    .yellow {
+        background-color: #fff3cd;
+        color: #856404;
+        border-left: 5px solid #ffc107;
+    }
+
+    .orange {
+        background-color: #ffe5b4;
+        color: #854d0e;
+        border-left: 5px solid #fd7e14;
+    }
+
+    .red {
+        background-color: #f8d7da;
+        color: #721c24;
+        border-left: 5px solid #dc3545;
+    }
+
+    .black {
+        background-color: #495057;
+        color: #ffffff;
+        border-left: 5px solid #212529;
+    }
+
+    /* ---------- METRIC CARDS ---------- */
+
     .metric-card {
-        background-color: #f8f9fa;
-        border-radius: 0.5rem;
-        padding: 1rem;
+        height: 150px;
+        background: linear-gradient(180deg, #eef1f4 0%, #e6eaee 100%);
+        border: 1px solid #d5dbe1;
+        border-radius: 0.8rem;
+        padding: 1rem 0.9rem;
         text-align: center;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        box-shadow: 0 2px 8px rgba(44, 62, 80, 0.08);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        transition: transform 0.15s ease, box-shadow 0.15s ease;
     }
-    .metric-value {
-        font-size: 2rem;
-        font-weight: bold;
-        color: #2c3e50;
+
+    .metric-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 16px rgba(44, 62, 80, 0.12);
     }
+
     .metric-label {
-        font-size: 0.9rem;
-        color: #6c757d;
+        font-size: 0.88rem;
+        color: #5f6b76;
+        font-weight: 500;
+        line-height: 1.2;
     }
+
+    .metric-value {
+        font-size: 1.95rem;
+        font-weight: 700;
+        color: #2c3e50;
+        line-height: 1.1;
+        margin: 0.2rem 0;
+    }
+
+    .metric-sub {
+        font-size: 0.8rem;
+        color: #6c757d;
+        line-height: 1.2;
+    }
+
+    /* ---------- RISK BADGES ---------- */
+
     .risk-badge {
         display: inline-block;
-        padding: 0.25rem 0.5rem;
-        border-radius: 0.25rem;
-        font-weight: bold;
+        padding: 0.3rem 0.55rem;
+        border-radius: 0.35rem;
+        font-weight: 700;
         margin-right: 0.5rem;
+        font-size: 0.8rem;
+        letter-spacing: 0.02em;
+    }
+
+    /* ---------- STREAMLIT CHROME ---------- */
+
+    # MainMenu {visibility: hidden;}
+    footer {visibility: hidden;}
+    # header {visibility: hidden;}
+    .stDeployButton {display: none;}
+    #stDecoration {display: none;}
+
+    /* ---------- THEME TUNING ---------- */
+
+    :root {
+        --primary-color: #d4d4d8 !important;
+        --secondary-background-color: #f5f5f7 !important;
+        --text-color: #111827 !important;
     }
 
     /* ---------- SIDEBAR ---------- */
-
-    #MainMenu {visibility: hidden;}
-    footer {visibility: hidden;}
-    header {visibility: hidden;}
-    .stDeployButton {display:none;}
-    #stDecoration {display:none;}
-
-    /* Let Streamlit theme handle main colors; just nudge neutrals */
-    :root {
-        --primary-color: #d4d4d8 !important;              /* neutral gray */
-        --secondary-background-color: #f5f5f7 !important; /* cards / sidebar */
-        --text-color: #111827 !important;                 /* near black */
-    }
 
     section[data-testid="stSidebar"] {
         background: #EDEDF2 !important;
@@ -162,8 +228,68 @@ st.markdown("""
         overflow: hidden;
     }
 
+    /* ---------- PAGE CONTAINER ---------- */
+
+    .block-container {
+        padding-top: 1rem;
+        padding-bottom: 1.5rem;
+    }
+
+    /* ---------- RESPONSIVE TWEAKS ---------- */
+
+    @media (max-width: 1200px) {
+        .metric-card {
+            height: 140px;
+            padding: 0.9rem 0.75rem;
+        }
+
+        .metric-value {
+            font-size: 1.65rem;
+        }
+
+        .metric-label {
+            font-size: 0.8rem;
+        }
+
+        .metric-sub {
+            font-size: 0.75rem;
+        }
+    }
+
+     /* ---------- Folium / Leaflet control styling ---------- */
+    .leaflet-control-layers {
+        font-size: 12px !important;
+        border-radius: 8px !important;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.15) !important;
+    }
+
+    .leaflet-control-attribution {
+        font-size: 9px !important;
+        background: rgba(255,255,255,0.75) !important;
+        padding: 2px 6px !important;
+        border-radius: 4px !important;
+    }
+
+    .leaflet-control-fullscreen a,
+    .leaflet-control-layers-toggle,
+    .leaflet-control-measure a {
+        border-radius: 6px !important;
+    }
+
 </style>
 """, unsafe_allow_html=True)
+
+def metric_card(title, value, subtitle="", color="#2c3e50"):
+    st.markdown(
+        f"""
+        <div class="metric-card">
+            <div class="metric-label">{title}</div>
+            <div class="metric-value" style="color:{color};">{value}</div>
+            <div class="metric-sub">{subtitle}</div>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
 
 # =============================================================================
 # CONSTANTS AND CONFIGURATION
@@ -561,19 +687,39 @@ def build_folium_zones_map(zones_meta_df, zone_stats_df, selected_time):
     m = folium.Map(
         location=[center_lat, center_lon],
         zoom_start=12,
-        tiles="OpenStreetMap",
-        control_scale=True,
+        tiles=None,
+        control_scale=True
     )
 
     # Tile layers (your style)
-    folium.TileLayer("CartoDB positron", name="Light Map", overlay=False, control=True).add_to(m)
-    folium.TileLayer("CartoDB dark_matter", name="Dark Map", overlay=False, control=True).add_to(m)
+    folium.TileLayer(
+        "CartoDB positron", 
+        name="Light Map", 
+        overlay=False, 
+        control=True,
+        show=False
+    ).add_to(m)
+    folium.TileLayer(
+        "CartoDB dark_matter", 
+        name="Dark Map", 
+        overlay=False, 
+        control=True,
+        show=False
+    ).add_to(m)
+    folium.TileLayer(
+        "OpenStreetMap",
+        name="OpenStreetMap",
+        overlay=False,
+        control=True,
+        show=False
+    ).add_to(m)    
     folium.TileLayer(
         tiles="https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png",
         attr="Map data: © OpenStreetMap contributors, SRTM | Map style: © OpenTopoMap (CC-BY-SA)",
         name="Topographic",
         overlay=False,
         control=True,
+        show=False
     ).add_to(m)
     folium.TileLayer(
         tiles="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
@@ -581,6 +727,7 @@ def build_folium_zones_map(zones_meta_df, zone_stats_df, selected_time):
         name="Satellite",
         overlay=False,
         control=True,
+        show=True
     ).add_to(m)
 
     # Draw polygons
@@ -771,8 +918,6 @@ st.subheader(f"📊 Current Conditions: {selected_time.strftime('%Y-%m-%d %H:%M'
 # Get data for selected site
 site_current = current_data[current_data['site'] == selected_site]
 
-cols = st.columns(3)
-
 if not site_current.empty:
     row = site_current.iloc[0]
     twb_eff = row.get('twb_eff_mean', row.get('risk_mean', np.nan))
@@ -785,69 +930,56 @@ if not site_current.empty:
     urban = twb_eff - twb_base - wind - crowd
     
     alert_color, alert_msg = get_alert_info(twb_eff)
-    
-    with cols[0]:
-        st.markdown(
-            f"<div class='metric-card'>"
-            f"<div class='metric-label'>Effective Wet-bulb Temp</div>"
-            f"<div class='metric-value' style='color:{get_alert_color(twb_eff)};'>{twb_eff:.1f}°C</div>"
-            f"<div class='metric-label'>{alert_color} ALERT</div>"
-            f"</div>",
-            unsafe_allow_html=True
-        )
-    
-    with cols[1]:
-        st.markdown(
-            f"<div class='metric-card'>"
-            f"<div class='metric-label'>Baseline Wet-bulb Temp</div>"
-            f"<div class='metric-value'>{twb_base:.1f}°C</div>"
-            f"<div class='metric-label'>Meteorological</div>"
-            f"</div>",
-            unsafe_allow_html=True
-        )
-    
-    # with cols[2]:
-    #     st.markdown(
-    #         f"<div class='metric-card'>"
-    #         f"<div class='metric-label'>Urban</div>"
-    #         f"<div class='metric-value' style='color:#FF6B6B;'>+{urban:.2f}°C</div>"
-    #         f"<div class='metric-label'>{(urban/(twb_eff-twb_base)*100) if twb_eff>twb_base else 0:.0f}% of amplification</div>"
-    #         f"</div>",
-    #         unsafe_allow_html=True
-    #     )
-    
-    # with cols[3]:
-    #     st.markdown(
-    #         f"<div class='metric-card'>"
-    #         f"<div class='metric-label'>Crowd</div>"
-    #         f"<div class='metric-value' style='color:#4ECDC4;'>+{crowd:.2f}°C</div>"
-    #         f"<div class='metric-label'>{(crowd/(twb_eff-twb_base)*100) if twb_eff>twb_base else 0:.0f}% of amplification</div>"
-    #         f"</div>",
-    #         unsafe_allow_html=True
-    #     )
 
-    # with cols[4]:
-    #     st.markdown(
-    #         f"<div class='metric-card'>"
-    #         f"<div class='metric-label'>Wind</div>"
-    #         f"<div class='metric-value' style='color:#FF6B6B;'>+{wind:.2f}°C</div>"
-    #         f"<div class='metric-label'>{(wind/(twb_eff-twb_base)*100) if twb_eff>twb_base else 0:.0f}% of amplification</div>"
-    #         f"</div>",
-    #         unsafe_allow_html=True
-    #     )
-    
+    cols = st.columns(6, gap="small")
+
+    with cols[0]:
+        metric_card(
+            "Effective Wet-bulb Temp",
+            f"{twb_eff:.1f}°C",
+            f"{alert_color} ALERT",
+            get_alert_color(twb_eff)
+        )
+
+    with cols[1]:
+        metric_card(
+            "Baseline Wet-bulb Temp",
+            f"{twb_base:.1f}°C",
+            "Meteorological"
+        )
+
     with cols[2]:
+        metric_card(
+            "Urban",
+            f"+{urban:.2f}°C",
+            f"{(urban/(twb_eff-twb_base)*100) if twb_eff > twb_base else 0:.0f}% of amplification",
+            "#FF6B6B"
+        )
+
+    with cols[3]:
+        metric_card(
+            "Crowd",
+            f"+{crowd:.2f}°C",
+            f"{(crowd/(twb_eff-twb_base)*100) if twb_eff > twb_base else 0:.0f}% of amplification",
+            "#4ECDC4"
+        )
+
+    with cols[4]:
+        metric_card(
+            "Wind",
+            f"+{wind:.2f}°C",
+            f"{(wind/(twb_eff-twb_base)*100) if twb_eff > twb_base else 0:.0f}% of amplification",
+            "#FF6B6B"
+        )
+
+    with cols[5]:
         hajj_day = row.get('hajj_day', 0)
         day_names = ["-2", "-1", "0 (Arrival)", "1 (Arafat)", "2 (Eid)", "3", "4", "5"]
         day_name = day_names[hajj_day + 2] if -2 <= hajj_day <= 5 else f"Day {hajj_day}"
-        
-        st.markdown(
-            f"<div class='metric-card'>"
-            f"<div class='metric-label'>Hajj Day</div>"
-            f"<div class='metric-value'>{hajj_day}</div>"
-            f"<div class='metric-label'>{day_name}</div>"
-            f"</div>",
-            unsafe_allow_html=True
+        metric_card(
+            "Hajj Day",
+            f"{hajj_day}",
+            day_name
         )
 
 # Alert banner
@@ -895,13 +1027,13 @@ with col1:
             st.warning("No zone polygons/stats available for this time.")
         else:
             m = build_folium_zones_map(zones_meta_df, zone_stats_df, selected_time)
-            st_folium(m, width=900, height=550)
+            st_folium(m, width=None, height=550)
 
             # # Optional: show a zone table under the map
             # st.markdown("#### 🔎 Zone Table (selected time)")
             # st.dataframe(
             #     zone_stats_df.sort_values(["max", "mean"], ascending=False),
-            #     use_container_width=True,
+            #     width='stretch',
             # )
 
             # NOTE: if you change alpha/zone counts, delete saved zones for that year:
@@ -1078,7 +1210,7 @@ if not site_df.empty:
     fig.update_yaxes(title_text="Temperature (°C)", row=1, col=1)
     fig.update_yaxes(title_text="Temperature (°C)", row=2, col=1)
     
-    st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(fig, width='stretch')
 
 # =============================================================================
 # SITE COMPARISON
@@ -1113,7 +1245,7 @@ with col1:
             }
         )
         
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width='stretch')
 
 with col2:
     # Alert distribution for selected site
@@ -1137,7 +1269,7 @@ with col2:
         )
         fig.update_traces(textposition='inside', textinfo='percent+label')
         
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width='stretch')
 
 # =============================================================================
 # RAW DATA EXPORT
