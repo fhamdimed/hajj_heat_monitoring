@@ -774,11 +774,11 @@ def build_folium_zones_map(zones_meta_df, zone_stats_df, selected_time):
     # Landmarks (your list)
     landmarks = [
         {"name": "Kaaba", "coords": [21.4225, 39.8262], "color": "red", "icon": "star"},
-        {"name": "Jabal al-Rahmah", "coords": [21.3548, 39.9837], "color": "green", "icon": "mountain"},
-        {"name": "Jamarat Bridge", "coords": [21.4042, 39.8967], "color": "purple", "icon": "tower"},
-        {"name": "Masjid Nimrah", "coords": [21.3522, 39.9625], "color": "green", "icon": "mosque"},
-        {"name": "Masjid al-Khayf", "coords": [21.4117, 39.8933], "color": "orange", "icon": "mosque"},
-        {"name": "Masjid al-Mash'ar al-Haram", "coords": [21.3883, 39.9183], "color": "purple", "icon": "mosque"},
+        {"name": "Jabal al-Rahmah", "coords": [21.355072511156614, 39.98406522908549], "color": "green", "icon": "mountain"},
+        {"name": "Jamarat Bridge", "coords": [21.421819470035967, 39.872182354459326], "color": "purple", "icon": "tower"},
+        {"name": "Masjid Nimrah", "coords": [21.35321648897039, 39.96637071166953], "color": "green", "icon": "mosque"},
+        {"name": "Masjid al-Khayf", "coords": [21.415735475015786, 39.87854548653564], "color": "orange", "icon": "mosque"},
+        {"name": "Masjid al-Mash'ar al-Haram", "coords": [21.3867276331775, 39.912532022519684], "color": "purple", "icon": "mosque"},
     ]
     for lm in landmarks:
         folium.Marker(
